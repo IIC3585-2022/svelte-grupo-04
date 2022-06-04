@@ -9,7 +9,8 @@ module.exports = {
   purge: {
     content: [
       "./src/App.svelte",
-      "./src/components/*.svelte"
+      "./src/components/*.svelte",
+      "./src/views/*.svelte"
     ],
     enabled: production // disable purge in dev
   },
