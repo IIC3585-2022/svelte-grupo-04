@@ -13,6 +13,7 @@
   };
   const nextQuestion = () => {
     $currentIndex += 1;
+    $store.totalQuestionsAnswered += 1;
     answered = false;
     correctAnswer = false;
   };
@@ -21,26 +22,26 @@
 <TriviaCard>
   <h2 class="mb-5 text-lg">{$currentQuestion.category}</h2>
 
-  <h1 class="mb-3 text-3xl font-semibold">{$currentQuestion.question}</h1>
+  <h1 class="mb-3 text-3xl font-semibold">{@html $currentQuestion.question}</h1>
   {#if answered}
     <div>
       {#if correctAnswer}
-        <img src="../assets/check.svg" alt="Correct" class="mx-auto w-1/3" />
+        <img src="../assets/check.svg" alt="Correct" class="w-1/3 mx-auto" />
       {:else}
-        <img src="../assets/cross.svg" alt="Incorrect" class="mx-auto w-1/3" />
+        <img src="../assets/cross.svg" alt="Incorrect" class="w-1/3 mx-auto" />
       {/if}
       <p class="text-lg">Respuesta correcta:</p>
-      <p class="mb-4 text-xl">{$currentQuestion.correctAnswer}</p>
-      <button class="rounded-lg bg-green-400 p-3" on:click={() => nextQuestion()}>Siguiente</button>
+      <p class="mb-4 text-xl">{@html $currentQuestion.correctAnswer}</p>
+      <button class="p-3 bg-green-400 rounded-lg" on:click={() => nextQuestion()}>Siguiente</button>
     </div>
   {:else}
     <div>
       {#each $currentAnswers as answer}
         <button
-          class="my-3 w-5/6 bg-green-400 p-4 text-xl"
+          class="w-5/6 p-4 my-3 text-xl bg-green-400"
           on:click={() => sendAnswer(answer.correct)}
         >
-          {answer.value}
+          {@html answer.value}
         </button>
       {/each}
     </div>
